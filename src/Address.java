@@ -1,6 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Address{
@@ -31,53 +34,28 @@ public class Address{
         list.add(details);
         details.display();
     }
-    private void IO_File() throws IOException {
-        FileWriter csvWriter = new FileWriter("addressBook.csv");
-        csvWriter.append("firstName");
-        csvWriter.append(",");
-        csvWriter.append("lastName");
-        csvWriter.append(",");
-        csvWriter.append("address");
-        csvWriter.append(",");
-        csvWriter.append("city");
-        csvWriter.append(",");
-        csvWriter.append("state");
-        csvWriter.append(",");
-        csvWriter.append("Zip Code");
-        csvWriter.append(",");
-        csvWriter.append("Phone no");
-        csvWriter.append(",");
-        csvWriter.append("email-ID");
-        csvWriter.append("\n");
-        for (Contact rowData : list) {
-            csvWriter.append(String.join(",",
-                    rowData.getFirstName()
-                            + "," + rowData.getLastName()
-                            + "," + rowData.getAddress()
-                            + "," + rowData.getCity()
-                            + "," + rowData.getState()
-                            + "," + rowData.getZip()
-                            + "," + rowData.getPhoneNumber()
-                            + "," + rowData.getEmail()));
-            csvWriter.append("\n");
-        }
+    public void file(){
 
-        csvWriter.flush();
-        csvWriter.close();
+        try {
+            FileWriter f=new FileWriter("address.txt");
+            f.write("firstName");
+            f.write("lastName");
+            f.write("address");
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+
 
     public static void main(String[] args) {
         Address a1=new Address();
         a1.AddContactsDetails();
+a1.file();
 
-Address m=new Address();
-        try {
-            m.IO_File();
-        } catch (IOException e) {
-        
-            e.printStackTrace();
-        }
-        a1.AddContactsDetails();
+
+
 
     }
 }
